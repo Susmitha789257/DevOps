@@ -1,0 +1,145 @@
+-- 1. Add 5 days to a date
+-- INTERVAL types: SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR, etc.
+SELECT ADDDATE('2025-06-12', INTERVAL 5 DAY); -- '2025-06-17'
+
+-- 2. Add time to a time value
+SELECT ADDTIME('10:00:00', '02:30:00'); -- '12:30:00'
+
+-- 3. Get current date
+SELECT CURDATE(); -- '2025-06-12'
+
+-- 4. Get current time
+SELECT CURTIME(); -- '14:15:32'
+
+-- 5. Get current date and time
+SELECT NOW(); -- '2025-06-12 14:15:32'
+
+-- 6. Extract date from datetime
+SELECT DATE(NOW()); -- '2025-06-12'
+
+-- 7. Another way to add days to a date
+-- INTERVAL types: SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR, etc.
+SELECT DATE_ADD('2025-06-12', INTERVAL 10 DAY); -- '2025-06-22'
+
+-- 8. Format date as 'dd-MMM-yyyy'
+-- Format examples: %d = day, %b = month short name, %Y = year
+SELECT DATE_FORMAT(NOW(), '%d-%b-%Y'); -- '12-Jun-2025'
+
+-- 9. Subtract days from a date
+-- INTERVAL types: SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR, etc.
+SELECT DATE_SUB('2025-06-12', INTERVAL 7 DAY); -- '2025-06-05'
+
+-- 10. Get difference between two dates in days
+SELECT DATEDIFF('2025-06-12', '2025-06-01'); -- 11
+
+-- 11. Get day part of a date
+SELECT DAY('2025-06-12'); -- 12
+
+-- 12. Get day name
+SELECT DAYNAME('2025-06-12'); -- 'Thursday'
+
+-- 13. Same as DAY()
+SELECT DAYOFMONTH('2025-06-12'); -- 12
+
+-- 14. Get weekday number (1=Sunday)
+SELECT DAYOFWEEK('2025-06-12'); -- 5
+
+-- 15. Day number in year
+SELECT DAYOFYEAR('2025-06-12'); -- 163
+
+-- 16. Extract specific part of date
+-- Units: SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR
+SELECT EXTRACT(MONTH FROM '2025-06-12'); -- 6
+
+-- 17. Convert days to date
+SELECT FROM_DAYS(739000); -- '2022-03-26'
+
+-- 18. Get hour from time
+SELECT HOUR('14:15:32'); -- 14
+
+-- 19. Get last day of the month
+SELECT LAST_DAY('2025-06-12'); -- '2025-06-30'
+
+-- 20. Get current local time
+SELECT LOCALTIME(); -- '2025-06-12 14:15:32'
+
+-- 21. Create a date from year and day number
+SELECT MAKEDATE(2025, 163); -- '2025-06-12'
+
+-- 22. Create time from components
+SELECT MAKETIME(14, 15, 32); -- '14:15:32'
+
+-- 23. Get microseconds from time
+SELECT MICROSECOND('10:30:15.123456'); -- 123456
+
+-- 24. Get minute from time
+SELECT MINUTE('14:15:32'); -- 15
+
+-- 25. Get month from date
+SELECT MONTH('2025-06-12'); -- 6
+
+-- 26. Get month name
+SELECT MONTHNAME('2025-06-12'); -- 'June'
+
+-- 27. Add months to period
+SELECT PERIOD_ADD(202506, 2); -- 202508
+
+-- 28. Difference between two periods in months
+SELECT PERIOD_DIFF(202506, 202501); -- 5
+
+-- 29. Get quarter of the year
+SELECT QUARTER('2025-06-12'); -- 2
+
+-- 30. Convert seconds to time
+SELECT SEC_TO_TIME(3661); -- '01:01:01'
+
+-- 31. Get seconds from time
+SELECT SECOND('14:15:32'); -- 32
+
+-- 32. Convert string to date
+-- Format examples: %d = day, %m = month, %Y = year
+SELECT STR_TO_DATE('12-06-2025', '%d-%m-%Y'); -- '2025-06-12'
+
+-- 33. Subtract interval from date (same as DATE_SUB)
+-- INTERVAL types: SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR, etc.
+SELECT SUBDATE('2025-06-12', INTERVAL 10 DAY); -- '2025-06-02'
+
+-- 34. Subtract time from time
+SELECT SUBTIME('10:30:00', '01:15:00'); -- '09:15:00'
+
+-- 35. Get system date and time
+SELECT SYSDATE(); -- '2025-06-12 14:15:32'
+
+-- 36. Extract time from datetime
+SELECT TIME(NOW()); -- '14:15:32'
+
+-- 37. Format time
+-- Format examples: %h = hour, %i = minute, %p = AM/PM
+SELECT TIME_FORMAT('14:15:32', '%h:%i %p'); -- '02:15 PM'
+
+-- 38. Convert time to total seconds
+SELECT TIME_TO_SEC('01:01:01'); -- 3661
+
+-- 39. Difference between two time values
+SELECT TIMEDIFF('14:00:00', '12:30:00'); -- '01:30:00'
+
+-- 40. Combine date and time
+SELECT TIMESTAMP('2025-06-12', '14:15:32'); -- '2025-06-12 14:15:32'
+
+-- 41. Days since year 0
+SELECT TO_DAYS('2025-06-12'); -- 743939
+
+-- 42. Week number of the year
+SELECT WEEK('2025-06-12'); -- 24
+
+-- 43. Day of the week (0=Monday)
+SELECT WEEKDAY('2025-06-12'); -- 3
+
+-- 44. Week of the year
+SELECT WEEKOFYEAR('2025-06-12'); -- 24
+
+-- 45. Get year from date
+SELECT YEAR('2025-06-12'); -- 2025
+
+-- 46. Year + Week number
+SELECT YEARWEEK('2025-06-12'); -- 202524
