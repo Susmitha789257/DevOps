@@ -254,65 +254,19 @@ def LevelMenu():
     elif choice==5: Additional()
     else: app.End(); control=1; LevelMenu()
 
-##def Synced():
-##    file_path = r"E:\SUSMITHA 2025\DevOps\Daily Time Sheet\Daily Time Sheet.xlsx"
-##    df = pd.read_excel(file_path, sheet_name="8 Months", skiprows=3, header=None)
-##    columns_to_use = [0, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15]
-##    cursor = conn.cursor()
-##    cursor.execute("SHOW COLUMNS FROM DailyTimeSheet1")
-##    db_columns = [i[0] for idx, i in enumerate(cursor.fetchall()) if idx not in [1,9,13,14,16]]
-##    cursor.close()
-##    cursor = conn.cursor(dictionary=True)
-##    day=0
-##    for i, row in df.iterrows():
-##        row_number = i + 4
-##        if (i + 1) % 8 == 0: continue
-##        day=day+1
-##        try:
-##            selected = [row[col] for col in columns_to_use]
-##            selected = [0 if pd.isna(val) else val for val in selected]
-##            parsed_date = pd.to_datetime(str(selected[0]) + "-2025").date()
-##            selected[0] = parsed_date
-##            cursor.execute("SELECT * FROM DailyTimeSheet1 WHERE DAILY_DATE = %s", (parsed_date,))
-##            existing = cursor.fetchone()
-##            if not existing:
-##                task = str(row[13]) if pd.notna(row[13]) else '----------'
-##                hours = float(row[14]) if pd.notna(row[14]) else 0.0
-##                cursor.execute(f"""INSERT INTO DailyTimeSheet1 ({", ".join(db_columns)},TASK, HOURS)
-##                VALUES ({", ".join(['%s'] * len(db_columns))}, %s, %s)""", tuple(selected) + (task, hours))
-##                print(f"🆕 Inserted ✅ DAY {day}: {parsed_date}")
-##            else:
-##                updates = {}
-##                for j, col in enumerate(db_columns[1:]):  # Skip DAILY_DATE
-##                    if int(existing[col]) != int(selected[j + 1]):
-##                        updates[col] = int(selected[j + 1])
-##                if updates:
-##                    set_clause = ", ".join([f"{col} = %s" for col in updates])
-##                    values = list(updates.values()) + [parsed_date]
-##                    cursor.execute(f"UPDATE DailyTimeSheet1 SET {set_clause} WHERE DAILY_DATE = %s", values)
-##                    print(f"🔁 Updated {len(updates)} field's ✅ DAY {day}: {parsed_date}")
-##        except Exception as e:
-##            print(f"❌ DAY {day} failed: {e}")
-##    conn.commit()
-##    print(f"✅ {day} days completed! 📅 You have only {224 - day} days left!")
-##    read=input("Press Enter key to go back :")
-##    MainMenu1()
-
-
 def Synced():
     file_path = r"E:\SUSMITHA 2025\DevOps\Daily Time Sheet\Daily Time Sheet.xlsx"
     df = pd.read_excel(file_path, sheet_name="8 Months", skiprows=3, header=None)
     columns_to_use = [0, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15]
     cursor = conn.cursor()
     cursor.execute("SHOW COLUMNS FROM DailyTimeSheet1")
-    db_columns = [i[0] for idx, i in enumerate(cursor.fetchall()) if idx not in [1, 9, 13, 14, 16]]  # Exclude calculated columns
+    db_columns = [i[0] for idx, i in enumerate(cursor.fetchall()) if idx not in [1,9,13,14,16]]
     cursor.close()
     cursor = conn.cursor(dictionary=True)
-    day = 0
+    day=0
     for i, row in df.iterrows():
-        row_number = i + 4
-        if (i + 1) % 8 == 0:
-            continue
+        row_number=i+4
+        if (i+1)%8==0: continue
         day += 1
         try:
             selected = [row[col] for col in columns_to_use]
@@ -350,7 +304,7 @@ def Synced():
             print(f"❌ Row {row_number} failed: {e}")
     conn.commit()
     cursor.close()
-    print(f"✅ {day} days completed! 📅 You have only {224 - day} days left!")
+    print(f"✅ {day} days completed! 📅 You have only {224 - day} days left! 📅 {(224 - day)//28} Months {(224 - day)%28} days!")
     input("🔙 Press Enter key to go back: ")
     MainMenu1()
 

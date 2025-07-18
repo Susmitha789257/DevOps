@@ -1,0 +1,55 @@
+✅ TASK 1:
+Install Git on your system and run the command to verify installation.
+Question: What command do you run to verify that Git is installed correctly?
+git or git --version
+
+✅ TASK 2:
+Configure your name and email in Git.
+Question: What two commands do you use to set your name and email globally in Git?
+git config --global user.name "Susmitha789257"
+git config --global user.email "atigaddasusmitha789@gmail.com"
+
+✅ TASK 3:
+Initialize a new Git repository in a folder.
+Question: What command initializes a new Git repo?
+git init
+
+✅ TASK 4:
+Create a file named readme.txt, write some text into it, and add it to staging.
+Question: What two commands do you run after creating the file to add it to staging?
+git add readme.txt
+
+✅ TASK 5:
+Commit the staged changes with the message: first commit.
+Question: What command do you use to commit?
+git commit -m "first commit"
+
+✅ TASK 6:
+Check the status of your repo at any time.
+Question: What command shows the working directory status?
+git status
+
+✅ TASK 7:
+Check the history of all commits in the repo.
+Question: What command shows commit history?
+git log
+git log --oneline
+
+✅ TASK 8:
+You modified a file but don’t want to keep the changes.
+Question: What command restores a file to the last committed version?\
+git restore filename
+git checkout -- filename
+
+✅ TASK 9:
+You added a file to staging but want to unstage it.
+Question: What command removes a file from staging?
+git reset filename
+
+✅ TASK 10:
+You don’t want Git to track .log files.
+Question: What steps do you follow to ignore all .log files in your repo?
+echo "*.log">.gitignore
+git add .gitignore
+git commit -m "ignore .log files"
+
