@@ -2,6 +2,17 @@ create database DailyTimeTable;
 Drop database DailyTimeTable;
 create database Daily_Time_Sheet_2025;
 USE Daily_Time_Sheet_2025;
+CREATE table DEVOPS(
+S_NO int not null auto_increment primary key,
+DEVOPS VARCHAR(10) not null,
+PART INT not null,
+FINAL VARCHAR(100),
+PAID VARCHAR(20)
+);
+DROP TABLE DEVOPS;
+SELECT * FROM DEVOPS;
+INSERT INTO DEVOPS (DEVOPS,PART,PAID)VALUES("GIT",4,''),("LINUX",5,''),("AWS",14,"3,8"),("DOCKER",3,"3"),("KUBERNETES",10,"5,9"),("JENKINS",4,''),("TERRAFORM",5,"3,5");
+
 create table DailyTimeTable(
 S_NO int not null auto_increment primary key,
 START_TIME TIME not null unique,
@@ -218,10 +229,11 @@ CREATE TABLE time_sheet (
     B INT,
     C INT
 );
-truncate time_sheet;
+truncate DailyTimeSheet1;
 select * from time_sheet;
 drop table time_sheet;
-
+create view DailyTimeSheet1_BackUp as select * from DailyTimeSheet1;
+select * from DailyTimeSheet1;
 create table time_sheet(
 DAILY_DATE date PRIMARY KEY default (CURRENT_DATE),
 DAILY_DAY varchar(3) generated always as (LEFT(DAYNAME(DAILY_DATE),3)) stored,

@@ -14,7 +14,7 @@ cursor=conn.cursor()
 class Daily_Time_Sheet:
     def __init__(self):
         print("WELCOME TO DAILY TIME SHEET PORTAL\n")
-        old=[("EXIT PORTAL"),("OLD"),("NEW"),("SYNCED")]
+        old=[("EXIT PORTAL"),("OLD"),("NEW"),("SYNCED"),("DEVOPS")]
         self.old=list(enumerate(old))
         action=[("BACK"),("TODAY INSERT"),("PAST INSERT"),("WEEKLY VIEW"),("MONTHLY VIEW"),("FINAL VIEW")]
         self.action=list(enumerate(action))
@@ -334,6 +334,33 @@ def MainMenu():
         EntryMenu()
     elif choice in range(3,6): MainView(choice,0)
     else: app.End(); control=1; MainMenu()
+def Devops():
+    cursor.execute("SELECT * FROM DEVOPS")
+    box=cursor.fetchall()
+    print(tabulate(box,headers=["S_NO","DEVOPS","PART","FINAL","PAID"],tablefmt="pretty"))
+    video=sum(i[2] for i in box)
+    print(f"Total Pending : {video} videos!")
+    column=[(0,"BACK")]+box
+    choice=app.Choice()
+    if choice==0:
+        MainMenu1()
+    else:
+        complete=[] if column[choice][3] is None else column[choice][3].split(",")
+        part=["BACK"]
+        for i in range(1,column[choice][2]+1):
+            if str(i) in complete: continue
+            part=part+[f"PART {i}"]
+        part=list(enumerate(part))
+        app.Table(part,"PENDING")
+        comp=int(input("Please enter the completion part number : "))
+        val=str(part[comp][1].split(" ")[1]) if column[choice][3] is None else column[choice][3]+","+str(part[comp][1].split(" ")[1])
+        sql=f"update DEVOPS set PART=%s,FINAL=%s where DEVOPS=%s"
+        count=column[choice][2]-1
+        cursor.execute(sql,[count,val,column[choice][1]])
+        conn.commit()
+        print(f"You Successfully Completed {column[choice][1]} PART {val}")
+    Devops()
+        
     
 def MainMenu1():
     global control,main
@@ -346,9 +373,13 @@ def MainMenu1():
         MainMenu()
     elif main==3:
         Synced()
+    elif main==4:
+        Devops()
     else: app.End(); control=1; MainMenu1()
 MainMenu1()
 cursor.close()
 conn.close()
       
+
+
 
