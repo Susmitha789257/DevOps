@@ -342,17 +342,18 @@ def Devops():
     print(f"Total Pending : {video} videos!")
     column=[(0,"BACK")]+box
     choice=app.Choice()
-    if choice==0:
-        MainMenu1()
+    if choice==0: MainMenu1()
     else:
         complete=[] if column[choice][3] is None else column[choice][3].split(",")
         part=["BACK"]
-        for i in range(1,column[choice][2]+1):
+        x=column[choice][2]+1+len(complete)
+        for i in range(1,x):
             if str(i) in complete: continue
             part=part+[f"PART {i}"]
         part=list(enumerate(part))
         app.Table(part,"PENDING")
         comp=int(input("Please enter the completion part number : "))
+        if comp==0: Devops()
         val=str(part[comp][1].split(" ")[1]) if column[choice][3] is None else column[choice][3]+","+str(part[comp][1].split(" ")[1])
         sql=f"update DEVOPS set PART=%s,FINAL=%s where DEVOPS=%s"
         count=column[choice][2]-1
