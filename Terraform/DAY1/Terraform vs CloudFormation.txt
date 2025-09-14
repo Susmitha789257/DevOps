@@ -1,0 +1,54 @@
+1. What They Are
+Terraform:
+- Open-source tool by HashiCorp.
+- Works with many providers (AWS, Azure, GCP, Kubernetes, GitHub, VMware, etc.).
+- Uses its own language called HCL (HashiCorp Configuration Language).
+
+CloudFormation:
+- Native IaC tool by AWS.
+- Works only with AWS resources.
+- Uses JSON or YAML for templates.
+
+2. Provider Support
+Terraform → Multi-cloud & hybrid. One tool to manage AWS, Azure, GCP, on-prem, SaaS, etc.
+CloudFormation → AWS-only (deep integration with AWS).
+
+3. Language
+Terraform → HCL (simple, human-readable).
+CloudFormation → JSON or YAML (more verbose, but integrates with AWS tooling).
+
+4. State Management
+Terraform → Uses a state file (terraform.tfstate) to track resources. State can be stored locally or remotely (S3, etc.).
+CloudFormation → Manages state internally in AWS. You don’t handle state files manually.
+
+5. Resource Coverage
+Terraform → Sometimes faster to support new AWS features (community + HashiCorp updates).
+CloudFormation → Usually lags a bit, but any new AWS service will eventually be supported because it’s AWS-native.
+
+6. Extendability
+Terraform → Highly extensible with providers & modules (can manage Datadog, GitHub, Kubernetes, etc.).
+CloudFormation → Limited to AWS, but has Custom Resources (backed by Lambda).
+
+7. Learning Curve
+Terraform → Easier syntax (HCL is simpler).
+CloudFormation → More complex templates (YAML/JSON).
+
+8. Pricing
+Both are free to use, you only pay for the cloud resources they create.
+
+Example
+Terraform (HCL):
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_s3_bucket" "example" {
+  bucket = "my-terraform-bucket"
+}
+
+CloudFormation (YAML):
+Resources:
+  ExampleBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: my-cf-bucket

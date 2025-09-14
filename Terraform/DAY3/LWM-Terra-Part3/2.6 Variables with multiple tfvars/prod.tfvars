@@ -1,0 +1,1 @@
+ec2_instance_type  = "t4.large"
